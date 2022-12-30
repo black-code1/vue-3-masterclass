@@ -36,7 +36,6 @@
 
 <script>
 import sourceData from '@/data.json'
-import AppDate from "@/components/AppDate.vue";
 export default {
   props: {
     threads: {
@@ -44,7 +43,6 @@ export default {
       required: true
     },
   },
-  components: {AppDate},
   data(){
     return{
       posts: sourceData.posts,

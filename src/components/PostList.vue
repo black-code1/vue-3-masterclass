@@ -30,7 +30,6 @@
 
 <script>
 import sourceData from '@/data.json'
-import AppDate from "@/components/AppDate.vue";
 export default {
   name: "PostList",
   props: {
@@ -39,7 +38,6 @@ export default {
       type: Array
     }
   },
-  components: {AppDate},
   data(){
     return{
       users: sourceData.users
