@@ -1,6 +1,8 @@
 import HomePage from "@/pages/HomePage.vue";
 import ThreadShowPage from "@/pages/ThreadShowPage.vue";
 import NotFoundPage from "@/pages/NotFoundPage.vue";
+import ForumPage from "@/pages/ForumPage.vue";
+
 import {createRouter, createWebHistory} from 'vue-router'
 import sourceData from '@/data.json'
 const routes = [
@@ -8,6 +10,12 @@ const routes = [
         path: '/',
         name: 'Home',
         component: HomePage
+    },
+    {
+        path: '/forum/:id',
+        name: 'Forum',
+        component: ForumPage,
+        props: true
     },
     {
         path: '/thread/:id',
