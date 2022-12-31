@@ -23,17 +23,17 @@ export default {
     }
   },
   computed: {
-    thread() {
-      return this.threads.find(thread => thread.id === this.id) //also available under this.$route.params.id
-    },
-    threadPosts () {
-      return this.posts.filter(post => post.threadId === this.id)
-    },
     threads() {
       return this.$store.state.threads
     },
     posts() {
       return this.$store.state.posts
+    },
+    thread() {
+      return this.threads.find(thread => thread.id === this.id) //also available under this.$route.params.id
+    },
+    threadPosts () {
+      return this.posts.filter(post => post.threadId === this.id)
     },
 
   },
@@ -43,8 +43,7 @@ export default {
         ...eventData.post,
         threadId: this.id,
       }
-      this.posts.push(post)
-      this.thread.posts.push(post.id)
+      this.$store.dispatch('createPost', post)
     }
   }
 
