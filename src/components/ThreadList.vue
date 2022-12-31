@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import sourceData from '@/data.json'
 export default {
   props: {
     threads: {
@@ -43,13 +42,14 @@ export default {
       required: true
     },
   },
-  data(){
-    return{
-      posts: sourceData.posts,
-      users: sourceData.users
+  computed: {
+    posts() {
+      return this.$store.state.posts
+    },
+    users() {
+      return this.$store.state.users
     }
   },
-
   methods: {
     postById (postId){
       return this.posts.find(post => post.id === postId)
