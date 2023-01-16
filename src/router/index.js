@@ -5,6 +5,7 @@ import ForumPage from "@/pages/ForumPage.vue";
 import CategoryPage from "@/pages/CategoryPage.vue";
 import {createRouter, createWebHistory} from 'vue-router'
 import sourceData from '@/data.json'
+import ProfilePage from "@/pages/ProfilePage.vue";
 
 
 const routes = [
@@ -12,6 +13,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: HomePage
+    },
+    {
+        path: '/me',
+        name: 'Profile',
+        component: ProfilePage
     },
     {
         path: '/category/:id',
