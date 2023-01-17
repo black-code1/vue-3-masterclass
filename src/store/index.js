@@ -29,10 +29,12 @@ export default createStore({
         }
     },
     actions: {
-        createPost (context, post) {
+        createPost ({commit, state}, post) {
             post.id = 'ggqq' + Math.random()
-            context.commit('setPost', {post}) // set the post
-            context.commit('appendPostToThread', {postId:post.id, threadId:post.threadId})
+            post.userId = state.authId
+            post.publishedAt = Math.floor(Date.now() / 1000)
+            commit('setPost', {post}) // set the post
+            commit('appendPostToThread', {postId:post.id, threadId:post.threadId})
         },
         updateUser ({commit}, user) {
             commit('setUser', {user, userId: user.id})
