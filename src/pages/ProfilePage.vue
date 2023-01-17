@@ -3,6 +3,7 @@
     <div class="flex-grid">
       <div class="col-3 push-top">
         <UserProfileCard :user="user"/>
+        <UserProfileCardEditor :user="user"/>
         <p class="text-small text-faded text-center">Member since june 2003, last visited 4 hours ago
         </p>
         
@@ -32,10 +33,11 @@
 import PostList from "@/components/PostList.vue";
 import {mapGetters} from "vuex";
 import UserProfileCard from "@/components/UserProfileCard.vue";
+import UserProfileCardEditor from "@/components/userProfileCardEditor.vue";
 
 export default {
   name: "ProfilePage",
-  components: {UserProfileCard, PostList},
+  components: {UserProfileCardEditor, UserProfileCard, PostList},
   computed: {
     ...mapGetters({user: 'authUser'}),
 
