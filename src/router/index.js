@@ -1,6 +1,7 @@
 import HomePage from "@/pages/HomePage.vue";
 import ThreadShowPage from "@/pages/ThreadShowPage.vue";
 import ThreadCreatePage from "@/pages/ThreadCreatePage.vue";
+import ThreadEditPage from "@/pages/ThreadEditPage.vue";
 import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ForumPage from "@/pages/ForumPage.vue";
 import CategoryPage from "@/pages/CategoryPage.vue";
@@ -63,9 +64,15 @@ const routes = [
         }
     },
     {
-        path: '/form/:forumId/thread/create',
+        path: '/forum/:forumId/thread/create',
         name: 'ThreadCreate',
         component: ThreadCreatePage,
+        props: true
+    },
+    {
+        path: '/thread/:id/edit',
+        name: 'ThreadEdit',
+        component: ThreadEditPage,
         props: true
     },
     {
