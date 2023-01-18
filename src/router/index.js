@@ -1,5 +1,6 @@
 import HomePage from "@/pages/HomePage.vue";
 import ThreadShowPage from "@/pages/ThreadShowPage.vue";
+import ThreadCreatePage from "@/pages/ThreadCreatePage.vue";
 import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ForumPage from "@/pages/ForumPage.vue";
 import CategoryPage from "@/pages/CategoryPage.vue";
@@ -60,6 +61,12 @@ const routes = [
             }
             // if doesnt exist redirect to not found
         }
+    },
+    {
+        path: '/form/:forumId/thread/create',
+        name: 'ThreadCreate',
+        component: ThreadCreatePage,
+        props: true
     },
     {
         path: '/:pathMatch(.*)*',
