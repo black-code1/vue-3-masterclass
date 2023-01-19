@@ -7,6 +7,13 @@
       </router-link>
     </h1>
 
+    <p>
+      By <a href="" class="link-unstyled">{{thread.author.name}}</a>, <AppDate :timestamp="thread.publishedAt" />.
+      <span style="float:right; margin-top: 2px;" class="hide-mobile text-faded text-small">
+        {{thread.repliesCount}} replies by {{thread.contributorsCount}} contributors
+      </span>
+    </p>
+
     <post-list :posts="threadPosts "/>
 
     <post-editor @save="addPost"/>
@@ -18,9 +25,10 @@
 
 import PostList from "@/components/PostList.vue";
 import PostEditor from "@/components/PostEditor.vue";
+import AppDate from "@/components/AppDate.vue";
 export default {
   name: 'ThreadShowPage',
-  components: {PostList, PostEditor},
+  components: {AppDate, PostList, PostEditor},
   props: {
     id: {
       required: true,
@@ -35,7 +43,7 @@ export default {
       return this.$store.state.posts
     },
     thread() {
-      return this.threads.find(thread => thread.id === this.id) //also available under this.$route.params.id
+      return this.$store.getters.thread(this.id) //also available under this.$route.params.id
     },
     threadPosts () {
       return this.posts.filter(post => post.threadId === this.id)

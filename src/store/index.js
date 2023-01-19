@@ -27,6 +27,24 @@ export default createStore({
                     return this.threads.length
                 }
             }
+        },
+        thread: state => {
+            return (id) => {
+                const thread = findById(state.threads, id)
+                return {
+                    ...thread,
+                    get author(){
+                        return findById(state.users, thread.userId)
+                    },
+                    get repliesCount(){
+                       return thread.posts.length - 1
+                    },
+                    get contributorsCount(){
+                        return thread.contributors.length
+                    }
+                }
+            }
+
         }
     },
     actions: {
@@ -36,6 +54,7 @@ export default createStore({
             post.publishedAt = Math.floor(Date.now() / 1000)
             commit('setPost', {post}) // set the post
             commit('appendPostToThread', {childId:post.id, parentId:post.threadId}) // append post to thre
+            commit('appendContributorToThread', {childId:state.authId, parentId:post.threadId})
         },
         async createThread({ commit, state, dispatch }, { text, title, forumId }) {
             const id = 'ggqq' + Math.random()
@@ -74,7 +93,8 @@ export default createStore({
         },
         appendPostToThread: makeAppendChildToParentMutation({parent: 'threads', child: 'posts'}),
         appendThreadToForum: makeAppendChildToParentMutation({parent: 'forums', child: 'threads'}),
-        appendThreadToUser: makeAppendChildToParentMutation({parent: 'users', child: 'threads'})
+        appendThreadToUser: makeAppendChildToParentMutation({parent: 'users', child: 'threads'}),
+        appendContributorToThread: makeAppendChildToParentMutation({parent: 'threads', child: 'contributors'})
     }
 })
 
@@ -82,6 +102,8 @@ function makeAppendChildToParentMutation ({parent, child}) {
     return (state, {childId, parentId}) => {
         const resource = findById(state[parent], parentId)
         resource[child] = resource[child] || []
-        resource[child].push(childId)
+        if(!resource[child].includes(childId)) {
+            resource[child].push(childId)
+        }
     }
 }
